@@ -20,3 +20,9 @@ jobs:
 
       - name: Check node version
         run: node --version
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Unit Tests
+        run: npm run test
