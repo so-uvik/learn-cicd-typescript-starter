@@ -18,11 +18,39 @@ jobs:
         with:
           node-version: 22
 
+      - name: Install pnpm
+        run: apt install pnpm
+
       - name: Check node version
         run: node --version
 
       - name: Install Dependencies
-        run: npm ci
+        run: pnpm --frozen-lockfile
 
       - name: Run Unit Tests
-        run: npm run test -- --coverage
+        run: pnpm run test -- --coverage
+
+  style:
+    name: Styles
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        run: apt install pnpm
+
+      - name: Check node version
+        run: node --version
+
+      - name: Install Dependencies
+        run: pnpm --frozen-lockfile
+
+      - name: Format Check
+        run: pnpm run format:check
