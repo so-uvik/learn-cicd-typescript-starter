@@ -19,7 +19,7 @@ jobs:
           node-version: 22
 
       - name: Install pnpm
-        run: apt install pnpm
+        run: npm i -g pnpm
 
       - name: Check node version
         run: node --version
