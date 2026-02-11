@@ -19,7 +19,7 @@ jobs:
           node-version: 22
 
       - name: Install pnpm
-        run: npm i -g pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Check node version
         run: node --version
@@ -44,7 +44,7 @@ jobs:
           node-version: 22
 
       - name: Install pnpm
-        run: npm i -g pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Check node version
         run: node --version
@@ -54,3 +54,6 @@ jobs:
 
       - name: Format Check
         run: pnpm run format:check
+
+      - name: Linting Check
+        run: pnpm run lint
