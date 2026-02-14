@@ -1,0 +1,63 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Check node version
+        run: node --version
+
+      - name: Install Dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Run Unit Tests
+        run: pnpm run test -- --coverage
+
+  style:
+    name: Styles
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Check node version
+        run: node --version
+
+      - name: Install Dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Format Check
+        run: pnpm run format:check
+
+      - name: Linting Check
+        run: pnpm run lint --max-warnings=0

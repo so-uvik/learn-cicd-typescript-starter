@@ -1,0 +1,30 @@
+import js from "@eslint/js";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
+import pluginSecurity from "eslint-plugin-security";
+
+export default defineConfig([
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    languageOptions: { globals: globals.node },
+  },
+  tseslint.configs.recommended,
+  {
+    plugins: { security: pluginSecurity },
+    rules: {
+      "security/detect-object-injection": "off",
+      "security/detect-non-literal-fs-filename": "off",
+      "security/detect-non-literal-regexp": "off",
+      "security/detect-non-literal-require": "off",
+      "security/detect-possible-timing-attacks": "off",
+      "security/detect-pseudoRandomBytes": "off",
+      "security/detect-unsafe-regex": "off",
+    },
+  },
+]);
