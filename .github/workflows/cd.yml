@@ -1,0 +1,31 @@
+name: cd
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: pnpm i --frozen-lockfile
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Deploy
+        run: |
+          echo "Deploying application..."
+          # Add your deployment commands here
